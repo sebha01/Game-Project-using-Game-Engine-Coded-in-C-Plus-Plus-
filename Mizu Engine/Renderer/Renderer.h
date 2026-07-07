@@ -19,5 +19,5 @@ public:
 	~Renderer();
 
 	//2D
-	void drawTriangle();
+	void draw2DTriangle();
 };

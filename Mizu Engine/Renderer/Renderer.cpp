@@ -8,7 +8,7 @@ Renderer::~Renderer()
 {
 }
 
-void Renderer::drawTriangle()
+void Renderer::draw2DTriangle()
 {
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
@@ -16,5 +16,4 @@ void Renderer::drawTriangle()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Triangle2DVertices), Triangle2DVertices, GL_STATIC_DRAW);
-
 }
