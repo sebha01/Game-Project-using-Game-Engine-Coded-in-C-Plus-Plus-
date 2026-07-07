@@ -21,7 +21,7 @@ add_subdirectory(dependencies/glfw)
 add_executable(cmake_test
 	"Mizu Engine/main.cpp"
 	"dependencies/glad/src/glad.c"
-)
+ "Mizu Engine/Window/MizuEngineWindow.h" "Mizu Engine/Window/MizuEngineWindow.cpp")
 
 target_include_directories(cmake_test PRIVATE 
 	"Mizu Engine"
