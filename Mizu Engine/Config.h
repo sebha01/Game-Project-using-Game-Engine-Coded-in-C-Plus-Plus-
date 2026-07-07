@@ -8,5 +8,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+//Classes
+#include "Renderer/Renderer.h"
+#include "Window/MizuEngineWindow.h"
+#include "Renderer/Colours.h"
 
 // TODO: Reference additional headers your program requires here.

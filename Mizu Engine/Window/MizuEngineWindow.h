@@ -8,6 +8,8 @@ class MizuEngineWindow
 		GLFWmonitor* monitor;
 		const GLFWvidmode* mode;
 
+		//Renderer
+
 	public:
 		//Constructor 
 		MizuEngineWindow();
