@@ -6,21 +6,21 @@
 class Renderer
 {
 	private:
-		//2D shapes 
+		//2D Triangle vertices
 		float Triangle2DVertices[9] = {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
 		 0.0f,  0.5f, 0.0f
 		};
 
+		//Reference containers for the vertex buffer object and vertex array object
 		GLuint VAO = 0;
 		GLuint VBO = 0;
+		//Vertex and fragment shader objects
 		GLuint vertexShader = 0;
 		GLuint fragmentShader = 0;
+		//Shader program object
 		GLuint shaderProgram = 0;
-
-		//3D shapes
-
 
 public:
 	//Constructor and Destructor
@@ -28,6 +28,8 @@ public:
 	~Renderer();
 
 	//2D
+
+	//Triangle
 	void setUp2DTriangle();
 	void draw2DTriangle();
 	void delete2DTriangleVariables();

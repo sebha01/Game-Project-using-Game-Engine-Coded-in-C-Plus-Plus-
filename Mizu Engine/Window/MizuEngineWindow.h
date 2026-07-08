@@ -6,11 +6,11 @@
 class MizuEngineWindow
 {
 	private:
-		//width and height
+		//default window width and height
 		const int defaultWindowWidth = 1920;
 		const int defaultWindowHeight = 1080;
 
-		//window, monitor and mode variables
+		//window, monitor and mode variables (monitor and mode more important for down the line)
 		GLFWwindow* window;
 		GLFWmonitor* monitor;
 		const GLFWvidmode* mode;
