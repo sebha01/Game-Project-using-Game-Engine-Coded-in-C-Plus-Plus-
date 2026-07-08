@@ -10,10 +10,19 @@ Renderer::~Renderer()
 
 void Renderer::draw2DTriangle()
 {
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
+	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+	glCompileShader(vertexShader);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	glCompileShader(fragmentShader);
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Triangle2DVertices), Triangle2DVertices, GL_STATIC_DRAW);
+	GLuint shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);
+
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
 }

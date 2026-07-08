@@ -79,6 +79,7 @@ void MizuEngineWindow::WindowUpdate()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//rendering loop here
+		MizuEngineRenderer.draw2DTriangle();
 
 		//check and call events and swap buffers
 		glfwSwapBuffers(window);

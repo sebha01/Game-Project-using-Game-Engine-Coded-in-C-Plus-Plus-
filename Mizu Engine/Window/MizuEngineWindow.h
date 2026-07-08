@@ -9,7 +9,7 @@ class MizuEngineWindow
 		const GLFWvidmode* mode;
 
 		//Renderer
-
+		Renderer MizuEngineRenderer;
 	public:
 		//Constructor 
 		MizuEngineWindow();
