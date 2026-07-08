@@ -86,6 +86,7 @@ void Renderer::draw2DTriangle()
 
 void Renderer::delete2DTriangleVariables()
 {
+	//Delete all objects created when rendering the 2D triangle
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteProgram(shaderProgram);
