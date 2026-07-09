@@ -6,6 +6,7 @@ VAO::VAO()
 
 void VAO::Create()
 {
+	//Generate VAO object
 	glGenVertexArrays(1, &ID);
 }
 
