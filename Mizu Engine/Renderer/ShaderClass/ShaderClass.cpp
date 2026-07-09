@@ -4,6 +4,9 @@ std::string getFileContents(const char* fileName)
 {
 	std::ifstream in(fileName, std::ios::binary);
 
+	std::cout << "Trying to open: " << fileName << std::endl;
+	std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
+
 	if (in)
 	{
 		std::string contents;
@@ -16,6 +19,10 @@ std::string getFileContents(const char* fileName)
 	}
 	
 	throw(errno);
+}
+
+Shader::Shader()
+{
 }
 
 Shader::Shader(const char* vertexFile, const char* fragmentFile)

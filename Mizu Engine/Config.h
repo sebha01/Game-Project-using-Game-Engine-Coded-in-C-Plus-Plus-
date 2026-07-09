@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <cerrno>
+#include <filesystem>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

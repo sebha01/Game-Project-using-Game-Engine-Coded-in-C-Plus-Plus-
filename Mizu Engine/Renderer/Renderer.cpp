@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
 Renderer::Renderer()
-{
+{	
 }
 
 Renderer::~Renderer()
@@ -10,36 +10,23 @@ Renderer::~Renderer()
 
 void Renderer::setUp2DTriangle()
 {
-	setUpShaderProgram();
+	VAO1.Create();
+	VAO1.Bind();
 
-	// Generate the VAO and VBO with only 1 object each
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-
-	// Make the VAO the current Vertex Array Object by binding it
-	glBindVertexArray(VAO);
-
-	// Bind the VBO specifying it's a GL_ARRAY_BUFFER
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	// Introduce the vertices into the VBO
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Triangle2DVertices), Triangle2DVertices, GL_STATIC_DRAW);
-
-	// Configure the Vertex Attribute so that OpenGL knows how to read the VBO
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	// Enable the Vertex Attribute so that OpenGL knows to use it
-	glEnableVertexAttribArray(0);
-
-	// Bind both the VBO and VAO to 0 so that we don't accidentally modify the VAO and VBO we created
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	defaultShaderProgram = Shader("../../../Mizu Engine/Renderer/Shaders/defaultShader.vert", "../../../Mizu Engine/Renderer/Shaders/defaultShader.frag");
+	VBO1 = VBO(Triangle2DVertices, sizeof(Triangle2DVertices));
+	
+	VAO1.LinkVBO(VBO1, 0);
+	VAO1.Unbind();
+	VBO1.Unbind();
 }
 
 void Renderer::draw2DTriangle()
 {
 	//Tell OpenGL which shader program to use
-	glUseProgram(shaderProgram);
+	defaultShaderProgram.Activate();
 	//Bind VAO so OpenGL knows to use it 
-	glBindVertexArray(VAO);
+	VAO1.Bind();
 	//Draw the triangle using GL_TRIANGLES primitive
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
@@ -47,59 +34,39 @@ void Renderer::draw2DTriangle()
 void Renderer::delete2DTriangleVariables()
 {
 	//Delete all objects created when rendering the 2D triangle
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteProgram(shaderProgram);
+	VAO1.Delete();
+	VBO1.Delete();
+	defaultShaderProgram.Delete();
 }
 
 void Renderer::setUpIndexBuffer2DTriangle()
 {
-	setUpShaderProgram();
+	VAO1.Create();
+	VAO1.Bind();
 
-	// Generate the VAO and VBO with only 1 object each
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+	defaultShaderProgram = Shader("../../../Mizu Engine/Renderer/Shaders/defaultShader.vert", "../../../Mizu Engine/Renderer/Shaders/defaultShader.frag");
+	VBO1 = VBO(IndexBuffer2DTriVerts, sizeof(IndexBuffer2DTriVerts));
+	EBO1 = EBO(IndexBufferIndices, sizeof(IndexBufferIndices));
 
-	// Make the VAO the current Vertex Array Object by binding it
-	glBindVertexArray(VAO);
-
-	// Bind the VBO specifying it's a GL_ARRAY_BUFFER
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	// Introduce the vertices into the VBO
-	glBufferData(GL_ARRAY_BUFFER, sizeof(IndexBuffer2DTriVerts), IndexBuffer2DTriVerts, GL_STATIC_DRAW);
-
-	// Bind the EBO specifying it's a GL_ELEMENT_ARRAY_BUFFER
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	// Introduce the indices into the EBO
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(IndexBufferIndices), IndexBufferIndices, GL_STATIC_DRAW);
-
-	// Configure the Vertex Attribute so that OpenGL knows how to read the VBO
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	// Enable the Vertex Attribute so that OpenGL knows to use it
-	glEnableVertexAttribArray(0);
-
-	// Bind both the VBO and VAO to 0 so that we don't accidentally modify the VAO and VBO we created
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	VAO1.LinkVBO(VBO1, 0);
+	VAO1.Unbind();
+	VBO1.Unbind();
+	EBO1.Unbind();
 }
 
 void Renderer::drawIndexBuffer2DTriangle()
 {
 	//Tell OpenGL which shader program to use
-	glUseProgram(shaderProgram);
+	defaultShaderProgram.Activate();
 	//Bind VAO so OpenGL knows to use it 
-	glBindVertexArray(VAO);
+	VAO1.Bind();
 	//Draw the triangle using GL_TRIANGLES primitive
 	glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
 }
 
 void Renderer::deleteIndexBuffer2DTriangleVariables()
 {
-	//Delete all objects created when rendering the 2D triangle
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
-	glDeleteProgram(shaderProgram);
+	VAO1.Delete();
+	VBO1.Delete();
+	EBO1.Delete();
 }

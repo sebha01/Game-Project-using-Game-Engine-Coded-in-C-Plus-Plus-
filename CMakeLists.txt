@@ -11,6 +11,9 @@ endif()
 
 project ("Mizu Engine Version 1.0.0")
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if (POLICY CMP0072)
 	cmake_policy(SET CMP0072 NEW)
 endif()
@@ -21,7 +24,7 @@ add_subdirectory(dependencies/glfw)
 add_executable(cmake_test
 	"Mizu Engine/main.cpp"
 	"dependencies/glad/src/glad.c"
- "Mizu Engine/Window/MizuEngineWindow.h" "Mizu Engine/Window/MizuEngineWindow.cpp" "Mizu Engine/Renderer/Renderer.h" "Mizu Engine/Renderer/Renderer.cpp"  "Mizu Engine/Renderer/Colours.h" "Mizu Engine/Renderer/ShaderClass/ShaderClass.h" "Mizu Engine/Renderer/ShaderClass/ShaderClass.cpp")
+ "Mizu Engine/Window/MizuEngineWindow.h" "Mizu Engine/Window/MizuEngineWindow.cpp" "Mizu Engine/Renderer/Renderer.h" "Mizu Engine/Renderer/Renderer.cpp"  "Mizu Engine/Renderer/Colours.h" "Mizu Engine/Renderer/ShaderClass/ShaderClass.h" "Mizu Engine/Renderer/ShaderClass/ShaderClass.cpp" "Mizu Engine/Renderer/VBO/VBO.h" "Mizu Engine/Renderer/VBO/VBO.cpp" "Mizu Engine/Renderer/EBO/EBO.h" "Mizu Engine/Renderer/EBO/EBO.cpp" "Mizu Engine/Renderer/VAO/VAO.h" "Mizu Engine/Renderer/VAO/VAO.cpp")
 
 target_include_directories(cmake_test PRIVATE 
 	"Mizu Engine"
