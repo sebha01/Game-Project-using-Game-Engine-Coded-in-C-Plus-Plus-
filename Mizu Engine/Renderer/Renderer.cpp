@@ -20,7 +20,7 @@ void Renderer::setUp2DTriangle()
 	//Create the VBO
 	VBO1 = VBO(Triangle2DVertices, sizeof(Triangle2DVertices));
 	
-	//Link the VBO to the VAO
+	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 7 * sizeof(GLfloat), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 7 * sizeof(GLfloat), (void*)(3 * sizeof(float)));
 	//Unbind VAO
@@ -31,9 +31,12 @@ void Renderer::setUp2DTriangle()
 
 void Renderer::draw2DTriangle()
 {
+	//Gets ID of uniform called scale
 	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
 	//Tell OpenGL which shader program to use
 	defaultShaderProgram.Activate();
+	//Assigns value to the uniform
+	//NOTE: Must always be done after activating the shader program
 	glUniform1f(uniID, 0.5f);
 	//Bind VAO so OpenGL knows to use it 
 	VAO1.Bind();
@@ -63,7 +66,7 @@ void Renderer::setUpIndexBuffer2DTriangle()
 	//Create EBO
 	EBO1 = EBO(IndexBufferIndices, sizeof(IndexBufferIndices));
 
-	//Link VBO to VAO
+	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 7 * sizeof(GLfloat), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 7 * sizeof(GLfloat), (void*)(3 * sizeof(float)));
 	//Unbond VAO
@@ -76,9 +79,12 @@ void Renderer::setUpIndexBuffer2DTriangle()
 
 void Renderer::drawIndexBuffer2DTriangle()
 {
+	//Gets ID of uniform called scale
 	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
 	//Tell OpenGL which shader program to use
 	defaultShaderProgram.Activate();
+	//Assigns value to the uniform
+	//NOTE: Must always be done after activating the shader program
 	glUniform1f(uniID, 0.5f);
 	//Bind VAO so OpenGL knows to use it 
 	VAO1.Bind();
