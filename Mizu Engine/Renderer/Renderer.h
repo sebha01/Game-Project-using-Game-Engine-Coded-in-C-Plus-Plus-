@@ -39,6 +39,8 @@ class Renderer
 		VBO VBO1;
 		EBO EBO1;
 
+		GLuint uniID;
+
 	public:
 		//Constructor and Destructor
 		Renderer();

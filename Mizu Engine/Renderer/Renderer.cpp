@@ -31,8 +31,10 @@ void Renderer::setUp2DTriangle()
 
 void Renderer::draw2DTriangle()
 {
+	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
 	//Tell OpenGL which shader program to use
 	defaultShaderProgram.Activate();
+	glUniform1f(uniID, 0.5f);
 	//Bind VAO so OpenGL knows to use it 
 	VAO1.Bind();
 	//Draw the triangle using GL_TRIANGLES primitive
@@ -74,8 +76,10 @@ void Renderer::setUpIndexBuffer2DTriangle()
 
 void Renderer::drawIndexBuffer2DTriangle()
 {
+	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
 	//Tell OpenGL which shader program to use
 	defaultShaderProgram.Activate();
+	glUniform1f(uniID, 0.5f);
 	//Bind VAO so OpenGL knows to use it 
 	VAO1.Bind();
 	//Draw the triangle using GL_TRIANGLES primitive
