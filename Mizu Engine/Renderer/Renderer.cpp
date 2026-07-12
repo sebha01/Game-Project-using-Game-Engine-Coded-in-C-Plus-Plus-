@@ -164,7 +164,7 @@ void Renderer::setUpTexturedQuad()
 
 	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 9 * sizeof(GLfloat), (void*)0);
-	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 9 * sizeof(GLfloat), (void*)(3 * sizeof(float)));
+	VAO1.LinkAttrib(VBO1, 1, 4, GL_FLOAT, 9 * sizeof(GLfloat), (void*)(3 * sizeof(float)));
 	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 9 * sizeof(GLfloat), (void*)(7 * sizeof(float)));
 	//Unbond VAO
 	VAO1.Unbind();
@@ -173,14 +173,17 @@ void Renderer::setUpTexturedQuad()
 	//Unbind EBO
 	EBO1.Unbind();
 
-	bytes = stbi_load("../../../../Resources/Textures/AngledBlocksFloor/angled-blocks-vegetation_albedo.png", &widthImg, &heightImg, &numColCh, 0);
-
-	std::cout << "Loading textures..." << std::endl;
+	bytes = stbi_load("../../../Resources/Textures/AngledBlocksFloor/angled-blocks-vegetation_albedo.png", &widthImg, &heightImg, &numColCh, STBI_rgb_alpha);
+	std::cout << "Loading texture..." << std::endl;
 
 	if (!bytes)
 	{
 		std::cout << "Texture failed to load: " << stbi_failure_reason() << std::endl;
 		return;
+	}
+	else
+	{
+		std::cout << "Texture loaded." << std::endl;
 	}
 
 	glGenTextures(1, &floorTexture);
@@ -208,6 +211,7 @@ void Renderer::drawTexturedQuad()
 	tex0Uni = glGetUniformLocation(defaultShaderProgram.ID, "tex0");
 	//Tell OpenGL which shader program to use
 	defaultShaderProgram.Activate();
+	glUniform1i(tex0Uni, 0);
 	//Assigns value to the uniform
 	//NOTE: Must always be done after activating the shader program
 	glUniform1f(uniID, 0.5f);
