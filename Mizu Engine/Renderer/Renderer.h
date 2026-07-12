@@ -6,6 +6,7 @@
 #include "VAO/VAO.h"
 #include "VBO/VBO.h"
 #include "EBO/EBO.h"
+#include "stb_image.h"
 
 class Renderer
 {
@@ -32,12 +33,12 @@ class Renderer
 			5, 4, 1 //Upper triangle
 		};
 		//2D square vertices
-		GLfloat squareVertices[28] = {
+		GLfloat squareVertices[36] = {
 			// COORDINATES			/		COLOURS			//
-			-0.5f, -0.5f, 0.0f,			green.r, green.g, green.b, green.a, // Lower left corner
-			-0.5f,  0.5f, 0.0f,			blue.r,	 blue.g,  blue.b,  blue.a, // Lower left corner
-			 0.5f,  0.5f, 0.0f,			red.r,   red.g,   red.b,   red.a, // Lower left corner
-			 0.5f, -0.5f, 0.0f,			white.r, white.g, white.b, white.a // Lower left corner
+			-0.5f, -0.5f, 0.0f,			green.r, green.g, green.b, green.a,			0.0f, 0.0f,		// Lower left corner
+			-0.5f,  0.5f, 0.0f,			blue.r,	 blue.g,  blue.b,  blue.a,			0.0f, 1.0f,		// Lower left corner
+			 0.5f,  0.5f, 0.0f,			red.r,   red.g,   red.b,   red.a,			1.0f, 1.0f,		// Lower left corner
+			 0.5f, -0.5f, 0.0f,			white.r, white.g, white.b, white.a,			1.0f, 0.0f,		// Lower left corner
 		};
 		//2D square indices   
 		GLuint squareIndices[6] = {
@@ -54,8 +55,18 @@ class Renderer
 
 		GLuint uniID;
 
+		//Shader filepaths
 		const char* vertexShaderPath = "../../../Resources/Shaders/defaultShader.vert";
 		const char* fragmentShaderPath = "../../../Resources/Shaders/defaultShader.frag";
+
+		//Textures
+		int widthImg = 0;
+		int heightImg = 0;
+		int numColCh = 0;
+		unsigned char* bytes = 0;
+
+		GLuint floorTexture;
+		GLuint tex0Uni;
 
 	public:
 		//Constructor and Destructor
@@ -77,4 +88,8 @@ class Renderer
 		void setUp2DSquare();
 		void draw2DSquare();
 		void delete2DSquare();
+		//Textured Quad
+		void setUpTexturedQuad();
+		void drawTexturedQuad();
+		void deleteTexturedQuad();
 };

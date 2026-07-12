@@ -75,7 +75,8 @@ void MizuEngineWindow::WindowInit()
 	//Set up everything needed to render the 2D Triangle
 	//MizuEngineRenderer.setUp2DTriangle();
 	//MizuEngineRenderer.setUpIndexBuffer2DTriangle();
-	MizuEngineRenderer.setUp2DSquare();
+	//MizuEngineRenderer.setUp2DSquare();
+	MizuEngineRenderer.setUpTexturedQuad();
 }
 
 void MizuEngineWindow::WindowUpdate()
@@ -94,7 +95,8 @@ void MizuEngineWindow::WindowUpdate()
 		//rendering loop here
 		//MizuEngineRenderer.draw2DTriangle();
 		//MizuEngineRenderer.drawIndexBuffer2DTriangle();
-		MizuEngineRenderer.draw2DSquare();
+		//MizuEngineRenderer.draw2DSquare();
+		MizuEngineRenderer.drawTexturedQuad();
 
 		//swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
@@ -108,7 +110,8 @@ void MizuEngineWindow::WindowTerminate()
 	//Delete all objects created when rendering 2d Triangle
 	//MizuEngineRenderer.delete2DTriangleVariables();
 	//MizuEngineRenderer.deleteIndexBuffer2DTriangleVariables();
-	MizuEngineRenderer.delete2DSquare();
+	//MizuEngineRenderer.delete2DSquare();
+	MizuEngineRenderer.deleteTexturedQuad();
 
 	//Terminate GLFW before ending the program
 	glfwTerminate();
