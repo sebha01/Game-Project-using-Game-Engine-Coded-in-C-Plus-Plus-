@@ -59,15 +59,8 @@ class Renderer
 		const char* vertexShaderPath = "../../../Resources/Shaders/defaultShader.vert";
 		const char* fragmentShaderPath = "../../../Resources/Shaders/defaultShader.frag";
 
-		//Textures
-		int widthImg = 0;
-		int heightImg = 0;
-		int numColCh = 0;
-		unsigned char* bytes = 0;
-
 		GLuint floorTexture;
-		GLuint tex0Uni;
-
+		
 	public:
 		//Constructor and Destructor
 		Renderer();

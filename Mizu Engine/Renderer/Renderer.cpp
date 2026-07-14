@@ -173,52 +173,20 @@ void Renderer::setUpTexturedQuad()
 	//Unbind EBO
 	EBO1.Unbind();
 
-	bytes = stbi_load("../../../Resources/Textures/AngledBlocksFloor/angled-blocks-vegetation_albedo.png", &widthImg, &heightImg, &numColCh, STBI_rgb_alpha);
-	std::cout << "Loading texture..." << std::endl;
+	
 
-	if (!bytes)
-	{
-		std::cout << "Texture failed to load: " << stbi_failure_reason() << std::endl;
-		return;
-	}
-	else
-	{
-		std::cout << "Texture loaded." << std::endl;
-	}
 
-	//Flip the texture because stbi reads the image in reverse compared to openGL
-	stbi_set_flip_vertically_on_load(true);
-
-	glGenTextures(1, &floorTexture);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, floorTexture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, widthImg, heightImg, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	stbi_image_free(bytes);
-	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Renderer::drawTexturedQuad()
 {
 	//Gets ID of uniform called scale
 	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
-	//Get ID of uniform called tex0
-	tex0Uni = glGetUniformLocation(defaultShaderProgram.ID, "tex0");
-	//Tell OpenGL which shader program to use
-	defaultShaderProgram.Activate();
-	glUniform1i(tex0Uni, 0);
+	
 	//Assigns value to the uniform
 	//NOTE: Must always be done after activating the shader program
 	glUniform1f(uniID, 0.5f);
-	glBindTexture(GL_TEXTURE_2D, floorTexture);
+
 	//Bind VAO so OpenGL knows to use it 
 	VAO1.Bind();
 	//Draw the triangle using GL_TRIANGLES primitive
