@@ -174,12 +174,14 @@ void Renderer::deleteTexturedQuad()
 
 void Renderer::update3DView(const int width, const int height)
 {
+	glEnable(GL_DEPTH_TEST);
+
 	defaultShaderProgram.Activate();
 
 	double crntTime = glfwGetTime();
 	if (crntTime - prevTime >= 1 / 60)
 	{
-		rotation += 0.5f;
+		rotation += 0.05f;
 		prevTime = crntTime;
 	}
 

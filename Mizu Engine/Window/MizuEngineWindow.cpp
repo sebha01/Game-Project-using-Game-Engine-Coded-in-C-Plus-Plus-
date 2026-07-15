@@ -91,7 +91,7 @@ void MizuEngineWindow::WindowUpdate()
 		//Clear colour from last frame and specify bg colour
 		glClearColor(0.08f, 0.12f, 0.35f, 1.0f);
 		//Clear back buffer and assign new colour to it
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//rendering loop here
 		//MizuEngineRenderer.draw2DTriangle();
