@@ -67,6 +67,7 @@ class Renderer
 		const char* defaultFragment3DShaderPath = "../../../Resources/Shaders/default3DShader.frag";
 
 		Texture floorTexture;
+		Texture limeStoneCliffsTexture;
 
 		//3D
 		glm::mat4 model;
@@ -76,6 +77,27 @@ class Renderer
 		int modelLoc = 0;
 		int viewLoc = 0;
 		int projLoc = 0;
+
+		//3D pyramid vertices
+		GLfloat pyramidVertices[45] =
+		{ //     COORDINATES     /				COLORS					/		TexCoord  //
+			-0.5f, 0.0f,  0.5f,     red.r,   red.g,   red.b,   red.a,			0.0f, 0.0f,
+			-0.5f, 0.0f, -0.5f,     blue.r,  blue.g,  blue.b,  blue.a,			5.0f, 0.0f,
+			 0.5f, 0.0f, -0.5f,     green.r, green.g, green.b, green.a,			0.0f, 0.0f,
+			 0.5f, 0.0f,  0.5f,     white.r, white.g, white.b, white.a,			5.0f, 0.0f,
+			 0.0f, 0.8f,  0.0f,     black.r, black.g, black.b, black.a,			2.5f, 5.0f
+		};
+
+		// Indices for vertices order
+		GLuint pyramidIndices[18] =
+		{
+			0, 1, 2,
+			0, 2, 3,
+			0, 1, 4,
+			1, 2, 4,
+			2, 3, 4,
+			3, 0, 4
+		};
 		
 	public:
 		//Constructor and Destructor
@@ -104,6 +126,9 @@ class Renderer
 
 
 		//3D
-		void set3DShaderProgram();
 		void update3DView(const int width, const int height);
+
+		//pyramid
+		void setUpPyramid();
+		void drawPyramid();
 };

@@ -203,11 +203,6 @@ void Renderer::deleteTexturedQuad()
 	floorTexture.Delete();
 }
 
-void Renderer::set3DShaderProgram()
-{
-	defaultShaderProgram = Shader(defaultVertex3DShaderPath, defaultFragment3DShaderPath);
-}
-
 void Renderer::update3DView(const int width, const int height)
 {
 	defaultShaderProgram.Activate();
@@ -231,4 +226,50 @@ void Renderer::update3DView(const int width, const int height)
 	projLoc = glGetUniformLocation(defaultShaderProgram.ID, "proj");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
 
+}
+
+void Renderer::setUpPyramid()
+{
+	//Create VAO
+	VAO1.Create();
+	//Bind the VAO
+	VAO1.Bind();
+
+	//Create shader program
+	defaultShaderProgram = Shader(defaultVertex3DShaderPath, defaultFragment3DShaderPath);
+	//Create VBO
+	VBO1 = VBO(pyramidVertices, sizeof(pyramidVertices));
+	//Create EBO
+	EBO1 = EBO(pyramidIndices, sizeof(pyramidIndices));
+
+	//Links the VBO attributes such as colour and coordinates to the VAO
+	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 9 * sizeof(GLfloat), (void*)0);
+	VAO1.LinkAttrib(VBO1, 1, 4, GL_FLOAT, 9 * sizeof(GLfloat), (void*)(3 * sizeof(float)));
+	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 9 * sizeof(GLfloat), (void*)(7 * sizeof(float)));
+	//Unbond VAO
+	VAO1.Unbind();
+	//Unbind VBO
+	VBO1.Unbind();
+	//Unbind EBO
+	EBO1.Unbind();
+
+	//floor texture object
+	limeStoneCliffsTexture = Texture("../../../Resources/Textures/LimestoneCliffs/limestone-cliffs_albedo.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+}
+
+void Renderer::drawPyramid()
+{
+	//Gets ID of uniform called scale
+	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
+	//Assigns value to the uniform
+	//NOTE: Must always be done after activating the shader program
+	glUniform1f(uniID, 0.5f);
+
+	//Binds texture so it appears when rendered
+	limeStoneCliffsTexture.Bind();
+	
+	//Bind VAO so OpenGL knows to use it 
+	VAO1.Bind();
+	//Draw the triangle using GL_TRIANGLES primitive
+	glDrawElements(GL_TRIANGLES, sizeof(pyramidIndices)/sizeof(int), GL_UNSIGNED_INT, 0);
 }

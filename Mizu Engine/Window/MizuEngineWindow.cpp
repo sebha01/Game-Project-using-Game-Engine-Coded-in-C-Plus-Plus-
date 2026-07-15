@@ -77,7 +77,7 @@ void MizuEngineWindow::WindowInit()
 	//MizuEngineRenderer.setUpIndexBuffer2DTriangle();
 	//MizuEngineRenderer.setUp2DSquare();
 	//MizuEngineRenderer.setUpTexturedQuad();
-	MizuEngineRenderer.set3DShaderProgram();
+	MizuEngineRenderer.setUpPyramid();
 }
 
 void MizuEngineWindow::WindowUpdate()
@@ -99,6 +99,7 @@ void MizuEngineWindow::WindowUpdate()
 		//MizuEngineRenderer.draw2DSquare();
 		//MizuEngineRenderer.drawTexturedQuad();
 		MizuEngineRenderer.update3DView(defaultWindowWidth, defaultWindowHeight);
+		MizuEngineRenderer.drawPyramid();
 
 		//swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
