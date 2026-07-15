@@ -107,6 +107,7 @@ class Renderer
 		//General rendering functions to reduce repatition of code
 		void setUpObjectsAndShaderProgram(const char* vertexShaderPath, const char* fragmentShaderPath, GLfloat verts[], GLsizeiptr vertsSize, GLuint indices[], GLsizeiptr indicesSize, bool hasEBO);
 		void unbindObjects(bool hasEBO);
+		void beginDrawProcess(Texture* texture, bool hasTexture);
 
 		//2D
 

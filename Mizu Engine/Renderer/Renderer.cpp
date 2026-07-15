@@ -41,6 +41,24 @@ void Renderer::unbindObjects(bool hasEBO)
 	}
 }
 
+void Renderer::beginDrawProcess(Texture* texture, bool hasTexture)
+{
+	//Gets ID of uniform called scale
+	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
+	//Assigns value to the uniform
+	//NOTE: Must always be done after activating the shader program
+	glUniform1f(uniID, 0.5f);
+	
+	if (hasTexture)
+	{
+		//Binds texture so it appears when rendered
+		texture->Bind();
+	}
+
+	//Bind VAO so OpenGL knows to use it 
+	VAO1.Bind();
+}
+
 void Renderer::setUp2DTriangle()
 {
 	setUpObjectsAndShaderProgram(defaultVertex2DShaderPath, defaultFragment2DShaderPath, Triangle2DVertices, sizeof(Triangle2DVertices), nullptr, 0, false);
@@ -54,15 +72,8 @@ void Renderer::setUp2DTriangle()
 
 void Renderer::draw2DTriangle()
 {
-	//Gets ID of uniform called scale
-	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
-	//Tell OpenGL which shader program to use
-	defaultShaderProgram.Activate();
-	//Assigns value to the uniform
-	//NOTE: Must always be done after activating the shader program
-	glUniform1f(uniID, 0.5f);
-	//Bind VAO so OpenGL knows to use it 
-	VAO1.Bind();
+	beginDrawProcess(nullptr, false);
+
 	//Draw the triangle using GL_TRIANGLES primitive
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
@@ -88,15 +99,8 @@ void Renderer::setUpIndexBuffer2DTriangle()
 
 void Renderer::drawIndexBuffer2DTriangle()
 {
-	//Gets ID of uniform called scale
-	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
-	//Tell OpenGL which shader program to use
-	defaultShaderProgram.Activate();
-	//Assigns value to the uniform
-	//NOTE: Must always be done after activating the shader program
-	glUniform1f(uniID, 0.5f);
-	//Bind VAO so OpenGL knows to use it 
-	VAO1.Bind();
+	beginDrawProcess(nullptr, false);
+
 	//Draw the triangle using GL_TRIANGLES primitive
 	glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
 }
@@ -122,15 +126,8 @@ void Renderer::setUp2DSquare()
 
 void Renderer::draw2DSquare()
 {
-	//Gets ID of uniform called scale
-	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
-	//Tell OpenGL which shader program to use
-	defaultShaderProgram.Activate();
-	//Assigns value to the uniform
-	//NOTE: Must always be done after activating the shader program
-	glUniform1f(uniID, 0.5f);
-	//Bind VAO so OpenGL knows to use it 
-	VAO1.Bind();
+	beginDrawProcess(nullptr, false);
+
 	//Draw the triangle using GL_TRIANGLES primitive
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
@@ -160,17 +157,8 @@ void Renderer::setUpTexturedQuad()
 
 void Renderer::drawTexturedQuad()
 {
-	//Gets ID of uniform called scale
-	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
-	//Get uniform ID for tex0 and tell openGL which shader to use
-	floorTexture.texUnit(defaultShaderProgram, "tex0", 0);
-	//Assigns value to the uniform
-	//NOTE: Must always be done after activating the shader program
-	glUniform1f(uniID, 0.5f);
-	//Binds texture so it appears when rendered
-	floorTexture.Bind();
-	//Bind VAO so OpenGL knows to use it 
-	VAO1.Bind();
+	beginDrawProcess(&floorTexture, true);
+
 	//Draw the triangle using GL_TRIANGLES primitive
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
@@ -206,7 +194,6 @@ void Renderer::update3DView(const int width, const int height)
 
 	projLoc = glGetUniformLocation(defaultShaderProgram.ID, "proj");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-
 }
 
 void Renderer::setUpPyramid()
@@ -226,17 +213,8 @@ void Renderer::setUpPyramid()
 
 void Renderer::drawPyramid()
 {
-	//Gets ID of uniform called scale
-	uniID = glGetUniformLocation(defaultShaderProgram.ID, "scale");
-	//Assigns value to the uniform
-	//NOTE: Must always be done after activating the shader program
-	glUniform1f(uniID, 0.5f);
+	beginDrawProcess(&limeStoneCliffsTexture, true);
 
-	//Binds texture so it appears when rendered
-	limeStoneCliffsTexture.Bind();
-	
-	//Bind VAO so OpenGL knows to use it 
-	VAO1.Bind();
 	//Draw the triangle using GL_TRIANGLES primitive
 	glDrawElements(GL_TRIANGLES, sizeof(pyramidIndices)/sizeof(int), GL_UNSIGNED_INT, 0);
 }
