@@ -43,15 +43,7 @@ void Renderer::unbindObjects(bool hasEBO)
 
 void Renderer::setUp2DTriangle()
 {
-	//Create VAO
-	VAO1.Create();
-	//Bind the VAO
-	VAO1.Bind();
-
-	//Create the shader program
-	defaultShaderProgram = Shader(defaultVertex2DShaderPath, defaultFragment2DShaderPath);
-	//Create the VBO
-	VBO1 = VBO(Triangle2DVertices, sizeof(Triangle2DVertices));
+	setUpObjectsAndShaderProgram(defaultVertex2DShaderPath, defaultFragment2DShaderPath, Triangle2DVertices, sizeof(Triangle2DVertices), nullptr, 0, false);
 	
 	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 7 * sizeof(GLfloat), (void*)0);
@@ -85,17 +77,7 @@ void Renderer::delete2DTriangleVariables()
 
 void Renderer::setUpIndexBuffer2DTriangle()
 {
-	//Create VAO
-	VAO1.Create();
-	//Bind the VAO
-	VAO1.Bind();
-
-	//Create shader program
-	defaultShaderProgram = Shader(defaultVertex2DShaderPath, defaultFragment2DShaderPath);
-	//Create VBO
-	VBO1 = VBO(IndexBuffer2DTriVerts, sizeof(IndexBuffer2DTriVerts));
-	//Create EBO
-	EBO1 = EBO(IndexBufferIndices, sizeof(IndexBufferIndices));
+	setUpObjectsAndShaderProgram(defaultVertex2DShaderPath, defaultFragment2DShaderPath, IndexBuffer2DTriVerts, sizeof(IndexBuffer2DTriVerts, IndexBufferIndices, sizeof(IndexBufferIndices), true);
 
 	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 7 * sizeof(GLfloat), (void*)0);
@@ -129,17 +111,7 @@ void Renderer::deleteIndexBuffer2DTriangleVariables()
 
 void Renderer::setUp2DSquare()
 {
-	//Create VAO
-	VAO1.Create();
-	//Bind the VAO
-	VAO1.Bind();
-
-	//Create shader program
-	defaultShaderProgram = Shader(defaultVertex2DShaderPath, defaultFragment2DShaderPath);
-	//Create VBO
-	VBO1 = VBO(squareVertices, sizeof(squareVertices));
-	//Create EBO
-	EBO1 = EBO(squareIndices, sizeof(squareIndices));
+	setUpObjectsAndShaderProgram(defaultVertex2DShaderPath, defaultFragment2DShaderPath, squareVertices, sizeof(squareVertices), squareIndices, sizeof(squareIndices), true);
 
 	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 7 * sizeof(GLfloat), (void*)0);
@@ -173,17 +145,7 @@ void Renderer::delete2DSquare()
 
 void Renderer::setUpTexturedQuad()
 {
-	//Create VAO
-	VAO1.Create();
-	//Bind the VAO
-	VAO1.Bind();
-
-	//Create shader program
-	defaultShaderProgram = Shader(defaultVertex2DShaderPath, defaultFragment2DShaderPath);
-	//Create VBO
-	VBO1 = VBO(squareVertices, sizeof(squareVertices));
-	//Create EBO
-	EBO1 = EBO(squareIndices, sizeof(squareIndices));
+	setUpObjectsAndShaderProgram(defaultVertex2DShaderPath, defaultFragment2DShaderPath, squareVertices, sizeof(squareVertices), squareIndices, sizeof(squareIndices), true);
 
 	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 9 * sizeof(GLfloat), (void*)0);
