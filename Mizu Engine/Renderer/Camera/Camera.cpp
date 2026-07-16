@@ -24,6 +24,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 
 void Camera::Inputs(GLFWwindow* window)
 {
+	//CAMERA MOVEMENT CONTROLS
 	//Forward cam movement
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
@@ -55,7 +56,7 @@ void Camera::Inputs(GLFWwindow* window)
 		Position += speed * -Up;
 	}
 
-
+	//SPEED CONTROLS
 	//Increase cam speed
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 	{
@@ -65,5 +66,33 @@ void Camera::Inputs(GLFWwindow* window)
 	else if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
 	{
 		speed = 0.01f;
+	}
+
+	//MOUSE MOVEMENT CONTROLS
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
+		double mouseX;
+		double mouseY;
+		glfwGetCursorPos(window, &mouseX, &mouseY);
+
+		float rotX = sensitivity * (float)(mouseY - (height / 2)) / height;
+		float rotY = sensitivity * (float)(mouseX - (height / 2)) / height;
+
+		glm::vec3 newOrientation = glm::rotate(Orientation, glm::radians(-rotX), glm::normalize(glm::cross(Orientation, Up)));
+
+		if (!((glm::angle(newOrientation, Up) <= glm::radians(5.0f)) || (glm::angle(newOrientation, -Up) <= glm::radians(5.0f))))
+		{
+			Orientation = newOrientation;
+		}
+
+		Orientation = glm::rotate(Orientation, glm::radians(-rotY), Up);
+
+		glfwSetCursorPos(window, (width / 2), (height / 2));
+	}
+	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE)
+	{
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 }
