@@ -80,6 +80,11 @@ void Renderer::setUpCamera(const int width, const int height)
 	camera = Camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 }
 
+void Renderer::enableCameraInputs(GLFWwindow* window)
+{
+	camera.Inputs(window);
+}
+
 void Renderer::setUp2DTriangle()
 {
 	setUpObjectsAndShaderProgram(defaultVertex2DShaderPath, defaultFragment2DShaderPath, Triangle2DVertices, sizeof(Triangle2DVertices), nullptr, 0, false);

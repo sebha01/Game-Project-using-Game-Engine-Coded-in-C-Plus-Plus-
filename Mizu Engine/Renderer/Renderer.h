@@ -119,6 +119,7 @@ class Renderer
 		void beginDrawProcess(Texture* texture);
 		void deleteObjectsTexturesAndShaderProgram(Texture* texture, bool hasEBO);
 		void setUpCamera(const int width, const int height);
+		void enableCameraInputs(GLFWwindow* window);
 
 		//2D
 

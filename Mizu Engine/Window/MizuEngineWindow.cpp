@@ -97,6 +97,7 @@ void MizuEngineWindow::WindowUpdate()
 
 		//rendering loop here
 		//Update the 3D view of the scene
+		MizuEngineRenderer.enableCameraInputs(window);
 		MizuEngineRenderer.update3DView(defaultWindowWidth, defaultWindowHeight);
 		
 		//MizuEngineRenderer.draw2DTriangle();
