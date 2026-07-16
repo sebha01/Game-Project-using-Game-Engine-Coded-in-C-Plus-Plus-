@@ -25,22 +25,22 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 void Camera::Inputs(GLFWwindow* window)
 {
 	//Forward cam movement
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
 		Position += speed * Orientation;
 	}
 	//Left cam movement
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
 		Position += speed * -glm::normalize(glm::cross(Orientation, Up));
 	}
 	//Back cam movement
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 	{
 		Position += speed * -Orientation;
 	}
 	//Right cam movement
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 	{
 		Position += speed * glm::normalize(glm::cross(Orientation, Up));
 	}
