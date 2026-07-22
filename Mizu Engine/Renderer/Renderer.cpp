@@ -341,6 +341,7 @@ void Renderer::setUpDiffuseObject()
 	defaultShaderProgram.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(defaultShaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(pyramidModel));
 	glUniform4f(glGetUniformLocation(defaultShaderProgram.ID, "lightColour"), lightColour.x, lightColour.y, lightColour.z, lightColour.w);
+	glUniform3f(glGetUniformLocation(defaultShaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 }
 
 void Renderer::drawDiffuseObject()
@@ -349,7 +350,7 @@ void Renderer::drawDiffuseObject()
 	beginDrawProcess(&limeStoneCliffsTexture);
 
 	//Draw the triangle using GL_TRIANGLES primitive
-	glDrawElements(GL_TRIANGLES, sizeof(pyramidIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, sizeof(diffuseObjectIndices) / sizeof(int), GL_UNSIGNED_INT, 0);
 
 	lightShader.Activate();
 	camera.Matrix(lightShader, "camMatrix");

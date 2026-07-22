@@ -80,7 +80,8 @@ void MizuEngineWindow::WindowInit()
 	//MizuEngineRenderer.setUp2DSquare();
 	//MizuEngineRenderer.setUpTexturedQuad();
 	//MizuEngineRenderer.setUpPyramid();
-	MizuEngineRenderer.setUpLitPyramid();
+	//MizuEngineRenderer.setUpLitPyramid();
+	MizuEngineRenderer.setUpDiffuseObject();
 }
 
 void MizuEngineWindow::WindowUpdate()
@@ -107,7 +108,8 @@ void MizuEngineWindow::WindowUpdate()
 		//MizuEngineRenderer.draw2DSquare();
 		//MizuEngineRenderer.drawTexturedQuad();
 		//MizuEngineRenderer.drawPyramid();
-		MizuEngineRenderer.drawLitPyramid();
+		//MizuEngineRenderer.drawLitPyramid();
+		MizuEngineRenderer.drawDiffuseObject();
 
 		//swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
@@ -124,7 +126,8 @@ void MizuEngineWindow::WindowTerminate()
 	//MizuEngineRenderer.delete2DSquare();
 	//MizuEngineRenderer.deleteTexturedQuad();
 	//MizuEngineRenderer.deletePyramid();
-	MizuEngineRenderer.deleteLitPyramid();
+	//MizuEngineRenderer.deleteLitPyramid();
+	MizuEngineRenderer.deleteDiffuseObject();
 
 	//Terminate GLFW before ending the program
 	glfwTerminate();
