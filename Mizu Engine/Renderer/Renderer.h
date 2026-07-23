@@ -81,8 +81,8 @@ class Renderer
 		const char* defaultVertex3DShaderPath = "../../../Resources/Shaders/default3DShader.vert";
 		const char* defaultFragment3DShaderPath = "../../../Resources/Shaders/default3DShader.frag";
 		//Diffuse shader
-		const char* diffuseVertex3DShaderPath = "../../../Resources/Shaders/diffuse3DShader.vert";
-		const char* diffuseFragment3DShaderPath = "../../../Resources/Shaders/diffuse3DShader.frag";
+		const char* litVertex3DShaderPath = "../../../Resources/Shaders/lit3DShader.vert";
+		const char* litFragment3DShaderPath = "../../../Resources/Shaders/lit3DShader.frag";
 
 		Texture floorTexture;
 		Texture limeStoneCliffsTexture;
@@ -115,8 +115,8 @@ class Renderer
 
 		Shader lightShader;
 		//light shader
-		const char* defaultLightVertexShaderPath = "../../../Resources/Shaders/defaultLightShader.vert";
-		const char* defaultLightFragmentShaderPath = "../../../Resources/Shaders/defaultLightShader.frag";
+		const char* defaultLightVertexShaderPath = "../../../Resources/Shaders/Light.vert";
+		const char* defaultLightFragmentShaderPath = "../../../Resources/Shaders/Light.frag";
 		
 		VAO lightVAO;
 		VBO lightVBO;

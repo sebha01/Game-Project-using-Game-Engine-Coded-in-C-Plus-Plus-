@@ -302,7 +302,7 @@ void Renderer::deleteLitPyramid()
 void Renderer::setUpDiffuseObject()
 {
 	//Set up objects and shader program to render the 3D pyramid
-	setUpObjectsAndShaderProgram(diffuseVertex3DShaderPath, diffuseFragment3DShaderPath, diffuseObjectVertices, sizeof(diffuseObjectVertices), diffuseObjectIndices, sizeof(diffuseObjectIndices), true);
+	setUpObjectsAndShaderProgram(litVertex3DShaderPath, litFragment3DShaderPath, diffuseObjectVertices, sizeof(diffuseObjectVertices), diffuseObjectIndices, sizeof(diffuseObjectIndices), true);
 
 	//Links the VBO attributes such as colour and coordinates to the VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 12 * sizeof(GLfloat), (void*)0);
